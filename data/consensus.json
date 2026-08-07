@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-08-07",
+  "method": "Public source manually checked; not an API feed",
+  "stocks": {
+    "005930": {"status":"available","rating":"매수","targetPrice":293676,"closePrice":230500,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/005930/consensus"},
+    "105560": {"status":"available","rating":"매수","targetPrice":189889,"closePrice":171500,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/105560/consensus"},
+    "055550": {"status":"available","rating":"매수","targetPrice":112900,"closePrice":102700,"asOf":"2026-08-03","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/055550/consensus"},
+    "000270": {"status":"available","rating":"매수","targetPrice":201048,"closePrice":133600,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/000270/consensus"},
+    "000880": {"status":"available","rating":"매수","targetPrice":137495,"closePrice":83800,"asOf":"2026-08-05","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/000880/consensus"},
+    "001340": {"status":"unrated","label":"컨센서스 미제공","asOf":"2026-08-05","note":"PKC(001340)는 정상 진행 종목입니다. 공개 집계상 투자의견이 없고 목표주가가 0원이라 유효한 컨센서스 없음으로 표시합니다.","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/001340/consensus"},
+    "078520": {"status":"unrated","label":"Not Rated","asOf":"2026-05-15","note":"최근 집계 가능한 목표주가가 0원으로 표시되어 유효한 컨센서스가 없는 것으로 처리했습니다."},
+    "097230": {"status":"available","rating":"매수","targetPrice":42000,"closePrice":16700,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/097230/consensus"}
+  }
+}
