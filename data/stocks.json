@@ -1,0 +1,10 @@
+[
+  {"rank":1,"name":"삼성전자","code":"005930","industry":"반도체·전자"},
+  {"rank":2,"name":"KB금융","code":"105560","industry":"금융"},
+  {"rank":3,"name":"신한지주","code":"055550","industry":"금융"},
+  {"rank":4,"name":"기아","code":"000270","industry":"자동차"},
+  {"rank":5,"name":"한화","code":"000880","industry":"지주·복합기업"},
+  {"rank":6,"name":"PKC","code":"001340","industry":"화학·소재"},
+  {"rank":7,"name":"에이블씨엔씨","code":"078520","industry":"생활·화장품"},
+  {"rank":8,"name":"HJ중공업","code":"097230","industry":"조선·건설"}
+]
