@@ -1,14 +1,14 @@
 {
   "capturedAt": "2026-08-07",
-  "method": "Public source manually checked; not an API feed",
+  "method": "\uacf5\uac1c \ucd9c\ucc98\ub97c \uc9c1\uc811 \ud655\uc778\ud55c \uc218\ub3d9 \uc2a4\ub0c5\uc0f7\uc774\uba70 API \uc790\ub3d9 \uac31\uc2e0 \uc790\ub8cc\uac00 \uc544\ub2d9\ub2c8\ub2e4.",
   "stocks": {
-    "005930": {"status":"available","rating":"매수","targetPrice":293676,"closePrice":230500,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/005930/consensus"},
-    "105560": {"status":"available","rating":"매수","targetPrice":189889,"closePrice":171500,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/105560/consensus"},
-    "055550": {"status":"available","rating":"매수","targetPrice":112900,"closePrice":102700,"asOf":"2026-08-03","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/055550/consensus"},
-    "000270": {"status":"available","rating":"매수","targetPrice":201048,"closePrice":133600,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/000270/consensus"},
-    "000880": {"status":"available","rating":"매수","targetPrice":137495,"closePrice":83800,"asOf":"2026-08-05","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/000880/consensus"},
-    "001340": {"status":"unrated","label":"컨센서스 미제공","asOf":"2026-08-05","note":"PKC(001340)는 정상 진행 종목입니다. 공개 집계상 투자의견이 없고 목표주가가 0원이라 유효한 컨센서스 없음으로 표시합니다.","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/001340/consensus"},
-    "078520": {"status":"unrated","label":"Not Rated","asOf":"2026-05-15","note":"최근 집계 가능한 목표주가가 0원으로 표시되어 유효한 컨센서스가 없는 것으로 처리했습니다."},
-    "097230": {"status":"available","rating":"매수","targetPrice":42000,"closePrice":16700,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"한경 코리아마켓","sourceUrl":"https://markets.hankyung.com/stock/097230/consensus"}
+    "005930": {"status":"available","rating":"\ub9e4\uc218","targetPrice":293676,"closePrice":230500,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"\ud55c\uacbd \ucf54\ub9ac\uc544\ub9c8\ucf13","sourceUrl":"https://markets.hankyung.com/stock/005930/consensus"},
+    "105560": {"status":"available","rating":"\ub9e4\uc218","targetPrice":189889,"closePrice":171500,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"\ud55c\uacbd \ucf54\ub9ac\uc544\ub9c8\ucf13","sourceUrl":"https://markets.hankyung.com/stock/105560/consensus"},
+    "055550": {"status":"available","rating":"\ub9e4\uc218","targetPrice":112900,"closePrice":102700,"asOf":"2026-08-03","capturedAt":"2026-08-07","sourceName":"\ud55c\uacbd \ucf54\ub9ac\uc544\ub9c8\ucf13","sourceUrl":"https://markets.hankyung.com/stock/055550/consensus"},
+    "000270": {"status":"available","rating":"\ub9e4\uc218","targetPrice":201048,"closePrice":133600,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"\ud55c\uacbd \ucf54\ub9ac\uc544\ub9c8\ucf13","sourceUrl":"https://markets.hankyung.com/stock/000270/consensus"},
+    "000880": {"status":"available","rating":"\ub9e4\uc218","targetPrice":137495,"closePrice":83800,"asOf":"2026-08-05","capturedAt":"2026-08-07","sourceName":"\ud55c\uacbd \ucf54\ub9ac\uc544\ub9c8\ucf13","sourceUrl":"https://markets.hankyung.com/stock/000880/consensus"},
+    "001340": {"status":"unrated","label":"\ucee8\uc13c\uc11c\uc2a4 \ubbf8\uc81c\uacf5","asOf":"2026-08-05","note":"PKC(001340)\ub294 \uc815\uc0c1 \uc9c4\ud589 \uc885\ubaa9\uc785\ub2c8\ub2e4. \uacf5\uac1c \uc9d1\uacc4\uc5d0\uc11c \ubaa9\ud45c\uc8fc\uac00\uac00 0\uc6d0\uc73c\ub85c \ud45c\uc2dc\ub418\uc5b4 \uc720\ud6a8\ud55c \ucee8\uc13c\uc11c\uc2a4 \uc5c6\uc74c\uc73c\ub85c \ucc98\ub9ac\ud569\ub2c8\ub2e4.","sourceName":"\ud55c\uacbd \ucf54\ub9ac\uc544\ub9c8\ucf13","sourceUrl":"https://markets.hankyung.com/stock/001340/consensus"},
+    "078520": {"status":"unrated","label":"Not Rated","asOf":"2026-05-15","note":"\ucd5c\uadfc \uc9d1\uacc4 \uac00\ub2a5\ud55c \ubaa9\ud45c\uc8fc\uac00\uac00 0\uc6d0\uc73c\ub85c \ud45c\uc2dc\ub418\uc5b4 \uc720\ud6a8\ud55c \ucee8\uc13c\uc11c\uc2a4\uac00 \uc5c6\ub294 \uac83\uc73c\ub85c \ucc98\ub9ac\ud588\uc2b5\ub2c8\ub2e4."},
+    "097230": {"status":"available","rating":"\ub9e4\uc218","targetPrice":42000,"closePrice":16700,"asOf":"2026-08-06","capturedAt":"2026-08-07","sourceName":"\ud55c\uacbd \ucf54\ub9ac\uc544\ub9c8\ucf13","sourceUrl":"https://markets.hankyung.com/stock/097230/consensus"}
   }
 }

@@ -1,6 +1,7 @@
 param(
   [int]$BusinessYear = ((Get-Date).Year - 1),
-  [ValidateSet('11011','11012','11013','11014')][string]$ReportCode = '11011'
+  [ValidateSet('11011','11012','11013','11014')][string]$ReportCode = '11011',
+  [ValidateRange(2,10)][int]$LookbackYears = 5
 )
 
 $ErrorActionPreference = 'Stop'
@@ -32,6 +33,45 @@ function Convert-Amount($value) {
   $clean = ([string]$value).Replace(',','').Trim()
   [long]$number = 0
   if ([long]::TryParse($clean, [ref]$number)) { return $number }
+  return $null
+}
+
+function Convert-Number($value) {
+  if ($null -eq $value -or [string]::IsNullOrWhiteSpace([string]$value) -or $value -eq '-') { return $null }
+  $clean = ([string]$value).Replace(',','').Replace('%','').Trim()
+  [double]$number = 0
+  if ([double]::TryParse($clean, [Globalization.NumberStyles]::Any, [Globalization.CultureInfo]::InvariantCulture, [ref]$number)) { return $number }
+  return $null
+}
+
+function Find-DividendValue($list, [string]$label) {
+  $row = $list | Where-Object { ([string]$_.se) -like "*$label*" -and ([string]$_.stock_knd) -like '*보통주*' } | Select-Object -First 1
+  if (-not $row) { $row = $list | Where-Object { ([string]$_.se) -like "*$label*" } | Select-Object -First 1 }
+  if ($row) { return Convert-Number $row.thstrm }
+  return $null
+}
+
+function Find-Account($list, [string[]]$names) {
+  foreach ($name in $names) {
+    $row = $list | Where-Object { ([string]$_.account_nm).Trim() -eq $name } | Select-Object -First 1
+    if ($row) { return Convert-Amount $row.thstrm_amount }
+  }
+  foreach ($name in $names) {
+    $row = $list | Where-Object { ([string]$_.account_nm) -like "*$name*" } | Select-Object -First 1
+    if ($row) { return Convert-Amount $row.thstrm_amount }
+  }
+  return $null
+}
+
+function Get-FinanceForYear([string]$corpCode, [int]$year, [string]$reportCode) {
+  foreach ($fsDiv in @('CFS','OFS')) {
+    try {
+      $candidate = Invoke-DartJson 'fnlttSinglAcntAll.json' @{ corp_code=$corpCode; bsns_year=$year; reprt_code=$reportCode; fs_div=$fsDiv }
+      if ($candidate.list.Count -gt 0) { return $candidate }
+    } catch {
+      if ($_.Exception.Message -notmatch '013') { throw }
+    }
+  }
   return $null
 }
 
@@ -79,6 +119,39 @@ try {
           order = [int]$_.ord
         }
       })
+      $history = @()
+      for ($historyYear = $BusinessYear; $historyYear -gt ($BusinessYear - $LookbackYears); $historyYear--) {
+        $yearFinance = if ($historyYear -eq $BusinessYear) { $finance } else { Get-FinanceForYear $corpCode $historyYear '11011' }
+        if (-not $yearFinance) { continue }
+        $list = @($yearFinance.list)
+        $stockStatus = $null
+        $dividendInfo = $null
+        try { $stockStatus = Invoke-DartJson 'stockTotqySttus.json' @{ corp_code=$corpCode; bsns_year=$historyYear; reprt_code='11011' } } catch { if ($_.Exception.Message -notmatch '013|014') { throw } }
+        try { $dividendInfo = Invoke-DartJson 'alotMatter.json' @{ corp_code=$corpCode; bsns_year=$historyYear; reprt_code='11011' } } catch { if ($_.Exception.Message -notmatch '013|014') { throw } }
+        $stockRow = @($stockStatus.list) | Where-Object { ([string]$_.se) -like '*보통주*' } | Select-Object -First 1
+        if (-not $stockRow) { $stockRow = @($stockStatus.list) | Where-Object { ([string]$_.se) -eq '합계' } | Select-Object -First 1 }
+        $dividendRows = @($dividendInfo.list)
+        $history += [ordered]@{
+          businessYear = $historyYear
+          fsDivision = [string]$list[0].fs_div
+          revenue = Find-Account $list @('매출액','영업수익','수익(매출액)','이자수익')
+          operatingIncome = Find-Account $list @('영업이익','영업이익(손실)','영업손익')
+          netIncome = Find-Account $list @('당기순이익','당기순이익(손실)','연결당기순이익')
+          assets = Find-Account $list @('자산총계')
+          liabilities = Find-Account $list @('부채총계')
+          equity = Find-Account $list @('자본총계')
+          operatingCashFlow = Find-Account $list @('영업활동현금흐름','영업활동으로 인한 현금흐름')
+          investingCashFlow = Find-Account $list @('투자활동현금흐름','투자활동으로 인한 현금흐름')
+          financingCashFlow = Find-Account $list @('재무활동현금흐름','재무활동으로 인한 현금흐름')
+          issuedShares = Convert-Amount $stockRow.istc_totqy
+          treasuryShares = Convert-Amount $stockRow.tesstk_co
+          distributedShares = Convert-Amount $stockRow.distb_stock_co
+          eps = Find-DividendValue $dividendRows '주당순이익'
+          dps = Find-DividendValue $dividendRows '주당 현금배당금'
+          dividendYield = Find-DividendValue $dividendRows '현금배당수익률'
+          payoutRatio = Find-DividendValue $dividendRows '현금배당성향'
+        }
+      }
       $resultStocks[$code] = [ordered]@{
         businessYear = $BusinessYear
         reportCode = $ReportCode
@@ -94,6 +167,7 @@ try {
           homepage = [string]$company.hm_url
         }
         accounts = $accounts
+        history = @($history | Sort-Object businessYear)
       }
     } catch {
       Write-Warning "$code fetch failed: $($_.Exception.Message)"

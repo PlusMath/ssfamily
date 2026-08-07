@@ -1,0 +1,117 @@
+{
+    "code":  "005930",
+    "name":  "삼성전자",
+    "generatedAt":  "2026-08-07T16:26:03+09:00",
+    "thresholdPercent":  5,
+    "newsProvider":  "not configured",
+    "events":  [
+                   {
+                       "date":  "2026-07-31",
+                       "close":  262500,
+                       "changePercent":  26.81,
+                       "direction":  "up",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-07-13",
+                       "close":  254500,
+                       "changePercent":  -10.7,
+                       "direction":  "down",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-07-03",
+                       "close":  309500,
+                       "changePercent":  8.22,
+                       "direction":  "up",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-06-23",
+                       "close":  310000,
+                       "changePercent":  -12.31,
+                       "direction":  "down",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-06-08",
+                       "close":  295500,
+                       "changePercent":  -10.18,
+                       "direction":  "down",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-05-21",
+                       "close":  299500,
+                       "changePercent":  8.51,
+                       "direction":  "up",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-05-06",
+                       "close":  266000,
+                       "changePercent":  14.41,
+                       "direction":  "up",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-04-01",
+                       "close":  189650,
+                       "changePercent":  13.43,
+                       "direction":  "up",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-03-18",
+                       "close":  208500,
+                       "changePercent":  7.53,
+                       "direction":  "up",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-03-04",
+                       "close":  172200,
+                       "changePercent":  -11.74,
+                       "direction":  "down",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2026-02-03",
+                       "close":  167500,
+                       "changePercent":  11.37,
+                       "direction":  "up",
+                       "articles":  [
+
+                                    ]
+                   },
+                   {
+                       "date":  "2024-08-05",
+                       "close":  71400,
+                       "changePercent":  -10.3,
+                       "direction":  "down",
+                       "articles":  [
+
+                                    ]
+                   }
+               ]
+}
