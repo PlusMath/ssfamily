@@ -1,6 +1,8 @@
 # SS Family 관심기업 분석
 
-8개 관심기업을 OpenDART 재무제표로 구성하는 정적 홈페이지입니다.
+8개 관심기업을 다루는 정적 홈페이지입니다. 종목별 페이지(`stocks/*.html`)는 OpenDART 재무제표·Yahoo
+Finance 시세·한경 컨센서스 등 실데이터를 페이지 안에 직접 기술해 넣은 완전 정적 HTML이며(런타임에
+JSON을 fetch하지 않음), `file://`로 직접 열어도 그대로 동작합니다.
 
 ## 대상 기업
 
@@ -13,24 +15,15 @@
 - 에이블씨엔씨(078520)
 - HJ중공업(097230)
 
-## DART 데이터 갱신
+## 페이지 작성/갱신 방식
 
-PowerShell에서 OpenDART 인증키를 현재 세션의 환경변수로 설정하고 실행합니다.
+새 종목 추가나 재무데이터 갱신은 `data-collector`/`chart-builder`/`news-collector`/`stock-analyst`
+서브에이전트로 DART·Yahoo Finance·네이버뉴스 데이터를 수집한 뒤 `stocks/NNN_CODE.html`을 직접
+작성/수정하는 방식입니다(과거의 `data/stocks.json` + `js/app.js`/`js/stock.js` 동적 렌더링 구조는
+제거됨). `data/financials.json`, `data/consensus.json`은 그 과정에서 모은 재사용 가능한 원본 데이터입니다.
 
-```powershell
-$env:DART_API_KEY = '발급받은 40자리 인증키'
-.\update_dart.ps1
-```
-
-기본값은 직전 사업연도의 사업보고서(`11011`)입니다. 다른 보고서는 다음처럼 지정합니다.
-
-```powershell
-.\update_dart.ps1 -BusinessYear 2026 -ReportCode 11013 # 1분기
-.\update_dart.ps1 -BusinessYear 2026 -ReportCode 11012 # 반기
-.\update_dart.ps1 -BusinessYear 2026 -ReportCode 11014 # 3분기
-```
-
-수집기는 종목코드로 DART 고유번호를 찾고, 연결재무제표(CFS)를 우선 요청한 뒤 없으면 별도재무제표(OFS)를 사용합니다. 결과는 `data/financials.json`에 저장됩니다.
+가격·캔들차트는 로컬에만 있는 `update_daily_charts.ps1`(저장소에는 커밋하지 않음, kospi10000과 동일
+컨벤션)로 평일 매일 자동 갱신됩니다.
 
 ## 로컬 실행
 
@@ -38,8 +31,8 @@ $env:DART_API_KEY = '발급받은 40자리 인증키'
 .\serve.ps1
 ```
 
-브라우저에서 `http://localhost:8792/`를 엽니다. `file://`로 직접 열면 브라우저의 JSON 요청 제한 때문에 데이터가 표시되지 않을 수 있습니다.
+브라우저에서 `http://localhost:8792/`를 엽니다.
 
 ## 배포
 
-전체 폴더를 GitHub Pages 등 정적 호스팅에 배포할 수 있습니다. `DART_API_KEY`는 생성된 JSON에 포함되지 않습니다.
+전체 폴더를 GitHub Pages 등 정적 호스팅에 배포할 수 있습니다.
