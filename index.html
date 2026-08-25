@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -6,937 +6,86 @@
   <title>SS Family 관심기업 분석</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
-
+  <link rel="stylesheet" href="css/industry.css" />
   <style>
-    :root {
-      --color-accent: oklch(0.47 0.14 258);
-      --color-accent-soft: oklch(0.47 0.14 258 / 0.09);
-      --color-up: oklch(0.56 0.19 25);
-      --color-down: oklch(0.55 0.16 240);
-      --color-star-active: oklch(0.72 0.16 80);
-      --color-star-inactive: oklch(0.82 0.008 90);
-      --color-bg: oklch(0.98 0.004 90);
-      --color-card-bg: oklch(1 0 0);
-      --color-border: oklch(0.9 0.006 90);
-      --color-text: oklch(0.22 0.02 260);
-      --color-text-secondary: oklch(0.52 0.02 260);
-      --radius-card: 12px;
-      --radius-badge: 7px;
-      --shadow-active-tab: 0 1px 3px oklch(0 0 0 / 0.08);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Noto Sans KR', Arial, sans-serif;
-      background-color: var(--color-bg);
-      color: var(--color-text);
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 12px 48px;
-      min-height: 72px;
-      background-color: var(--color-card-bg);
-      border-bottom: 1px solid var(--color-border);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      flex-wrap: wrap;
-    }
-
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .logo-badge {
-      width: 36px;
-      height: 36px;
-      flex-shrink: 0;
-      border-radius: 9px;
-      background: var(--color-accent);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 15px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.2;
-    }
-
-    header p {
-      margin: 2px 0 0;
-      color: var(--color-text-secondary);
-      font-size: 12px;
-      line-height: 1.2;
-    }
-
-    .market-switch {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .market-switch-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border-radius: 8px;
-      padding: 8px 14px;
-      text-decoration: none;
-      color: var(--color-text-secondary);
-    }
-
-    .market-switch-btn.active {
-      background: var(--color-accent-soft);
-      color: var(--color-accent);
-      cursor: default;
-    }
-
-    .fav-count {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding-left: 16px;
-      border-left: 1px solid var(--color-border);
-      color: var(--color-star-active);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .page-wrap {
-      max-width: 1360px;
-      margin: 0 auto;
-      padding: 40px 48px 64px;
-    }
-
-    .section-title {
-      margin: 0 0 6px;
-      font-size: 28px;
-      font-weight: 800;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin: 28px 0 36px;
-    }
-
-    .stat-card {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-card);
-      padding: 22px 24px;
-    }
-
-    .stat-label {
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .stat-value {
-      font-size: 32px;
-      font-weight: 800;
-    }
-
-    .stat-value.up { color: var(--color-up); }
-    .stat-value.dn { color: var(--color-down); }
-
-    .stat-unit {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--color-text-secondary);
-    }
-
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .view-toggle {
-      display: flex;
-      gap: 4px;
-      background: oklch(0.95 0.004 90);
-      padding: 4px;
-      border-radius: 10px;
-    }
-
-    .view-btn {
-      border: none;
-      cursor: pointer;
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      font-family: inherit;
-      background: transparent;
-      color: var(--color-text-secondary);
-    }
-
-    .view-btn.active {
-      background: var(--color-card-bg);
-      color: var(--color-accent);
-      box-shadow: var(--shadow-active-tab);
-    }
-
-    .fav-only-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .fav-only-btn {
-      display: none;
-      align-items: center;
-      gap: 5px;
-      border-radius: 9px;
-      padding: 7px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      border: 1px solid var(--color-border);
-      background: var(--color-card-bg);
-      color: var(--color-text-secondary);
-    }
-
-    .fav-only-btn.active {
-      border-color: var(--color-star-active);
-      background: oklch(0.72 0.16 80 / 0.12);
-      color: oklch(0.5 0.14 80);
-    }
-
-    .industry-nav {
-      display: none;
-    }
-
-    /* ── 순위별 뷰: table on desktop, stacked cards on mobile (same DOM) ── */
-    .rank-table {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-    }
-
-    .pagination {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .page-btn {
-      border: 1px solid var(--color-border);
-      background: var(--color-card-bg);
-      color: var(--color-text-secondary);
-      border-radius: 8px;
-      min-width: 34px;
-      height: 34px;
-      padding: 0 10px;
-      font-size: 13px;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-    }
-
-    .page-btn:hover:not(:disabled) {
-      background: oklch(0.97 0.004 90);
-    }
-
-    .page-btn.active {
-      background: var(--color-accent);
-      border-color: var(--color-accent);
-      color: #fff;
-    }
-
-    .page-btn:disabled {
-      opacity: 0.4;
-      cursor: default;
-    }
-
-    .rank-table-head,
-    .rank-row {
-      display: grid;
-      grid-template-columns: 44px minmax(140px, 1.6fr) 130px 100px 84px 108px 36px;
-      grid-template-areas: "rank name industry price change mcap star";
-      align-items: center;
-      gap: 8px 14px;
-      padding: 13px 20px;
-    }
-
-    .rank-table-head {
-      background: oklch(0.97 0.004 90);
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      font-weight: 600;
-    }
-
-    .rank-row {
-      border-top: 1px solid var(--color-border);
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .rank-row:hover {
-      background: oklch(0.97 0.004 90);
-    }
-
-    .rr-rank { grid-area: rank; font-size: 14px; font-weight: 600; color: var(--color-text-secondary); }
-    .rr-name-group { display: contents; }
-    .rr-name { grid-area: name; font-size: 14px; font-weight: 700; }
-    .rr-name small { font-weight: 400; color: var(--color-text-secondary); font-size: 12px; margin-left: 4px; }
-    .rr-industry { grid-area: industry; }
-    .rr-price-group { display: contents; }
-    .rr-price { grid-area: price; font-size: 14px; font-weight: 600; text-align: right; }
-    .rr-change { grid-area: change; font-size: 14px; font-weight: 700; text-align: right; }
-    .rr-mcap { grid-area: mcap; font-size: 14px; color: var(--color-text-secondary); text-align: right; }
-    .rr-star { grid-area: star; text-align: center; }
-
-    .industry-badge {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--color-accent);
-      background: var(--color-accent-soft);
-      padding: 4px 10px;
-      border-radius: var(--radius-badge);
-    }
-
-    .star-btn {
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-size: 17px;
-      color: var(--color-star-inactive);
-      padding: 4px;
-      line-height: 1;
-    }
-
-    .star-btn.active {
-      color: var(--color-star-active);
-    }
-
-    .up { color: var(--color-up); }
-    .dn { color: var(--color-down); }
-
-    /* ── 업종별 뷰 ── */
-    .industry-section {
-      margin-bottom: 20px;
-    }
-
-    .industry-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      padding: 0 4px;
-      margin-bottom: 10px;
-    }
-
-    .industry-title {
-      margin: 0;
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-    .industry-count {
-      color: var(--color-text-secondary);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .sector-list {
-      background: var(--color-card-bg);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-    }
-
-    .sector-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 20px;
-      border-top: 1px solid var(--color-border);
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .sector-row:first-child { border-top: none; }
-    .sector-row:hover { background: oklch(0.97 0.004 90); }
-
-    .sr-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .sr-name {
-      font-size: 14px;
-      font-weight: 700;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .sr-code {
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      flex-shrink: 0;
-    }
-
-    .sr-right {
-      display: flex;
-      gap: 28px;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .sr-price {
-      font-size: 14px;
-      font-weight: 600;
-      width: 90px;
-      text-align: right;
-    }
-
-    .sr-change {
-      font-size: 14px;
-      font-weight: 700;
-      width: 70px;
-      text-align: right;
-    }
-
-    .movers-toggle-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: none;
-      border-radius: 8px;
-      padding: 8px 14px;
-      font-size: 14px;
-      font-weight: 700;
-      font-family: inherit;
-      cursor: pointer;
-      background: var(--color-accent-soft);
-      color: var(--color-accent);
-    }
-
-    .movers-toggle-btn.has-alerts {
-      background: oklch(0.56 0.19 25 / 0.12);
-      color: var(--color-up);
-    }
-
-    .daily-movers {
-      display: none;
-      position: fixed;
-      top: 84px;
-      right: 48px;
-      z-index: 50;
-      width: min(420px, calc(100vw - 32px));
-      max-height: calc(100vh - 104px);
-      overflow-y: auto;
-      margin-bottom: 0;
-      padding: 22px;
-      border: 1px solid #dbeafe;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #eff6ff 0%, #ffffff 55%, #f0fdf4 100%);
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.22);
-    }
-
-    .daily-movers.open {
-      display: block;
-    }
-
-    .movers-close-btn {
-      border: none;
-      background: none;
-      cursor: pointer;
-      font-size: 18px;
-      line-height: 1;
-      color: var(--color-text-secondary);
-      padding: 4px;
-    }
-
-    .daily-movers-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 20px;
-    }
-
-    .daily-movers-eyebrow {
-      margin: 0 0 6px;
-      color: #2563eb;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .daily-movers-title {
-      margin: 0;
-      font-size: 17px;
-      line-height: 1.35;
-    }
-
-    .daily-movers-date {
-      color: #64748b;
-      font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .mover-summary {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .mover-summary-card {
-      padding: 10px 12px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.82);
-    }
-
-    .mover-summary-label {
-      color: #64748b;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .mover-summary-value {
-      display: block;
-      margin-top: 2px;
-      color: #0f172a;
-      font-size: 19px;
-      font-weight: 900;
-    }
-
-    .mover-groups {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .mover-group {
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      background: #ffffff;
-    }
-
-    .mover-group summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 15px 16px;
-      cursor: pointer;
-      font-weight: 800;
-      list-style: none;
-    }
-
-    .mover-group summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .mover-group summary::after {
-      content: '+';
-      color: #64748b;
-      font-size: 20px;
-    }
-
-    .mover-group[open] summary::after {
-      content: '−';
-    }
-
-    .mover-group-count {
-      margin-left: auto;
-      color: #64748b;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .mover-list {
-      margin: 0;
-      padding: 0 16px 14px;
-      list-style: none;
-    }
-
-    .mover-item {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto auto;
-      gap: 12px;
-      padding: 10px 0;
-      border-top: 1px solid #f1f5f9;
-      font-size: 14px;
-    }
-
-    .mover-name {
-      overflow: hidden;
-      color: #0f172a;
-      font-weight: 700;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .mover-name a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .mover-name a:hover {
-      color: #2563eb;
-    }
-
-    .mover-close {
-      color: #475569;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .mover-change {
-      min-width: 68px;
-      font-weight: 900;
-      text-align: right;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .mover-change.up { color: #D85A30; }
-    .mover-change.dn { color: #185FA5; }
-
-    .daily-movers-note {
-      margin: 18px 0 0;
-      color: #64748b;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .data-note {
-      margin: 0 auto 28px;
-      max-width: 900px;
-      color: #6b7280;
-      font-size: 13px;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    footer {
-      padding: 24px 20px;
-      text-align: center;
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    @media (max-width: 768px) {
-      .page-btn {
-        min-width: 30px;
-        height: 30px;
-        padding: 0 8px;
-        font-size: 12px;
-      }
-
-      header {
-        padding: 10px 16px;
-        min-height: 56px;
-      }
-
-      header h1 {
-        font-size: 14px;
-      }
-
-      .logo-badge {
-        width: 28px;
-        height: 28px;
-        font-size: 13px;
-        border-radius: 8px;
-      }
-
-      .market-switch {
-        font-size: 11px;
-        gap: 6px;
-        row-gap: 8px;
-        width: 100%;
-        justify-content: flex-start;
-      }
-
-      .market-switch-btn {
-        padding: 6px 10px;
-      }
-
-      .fav-count {
-        padding-left: 8px;
-        font-size: 12px;
-      }
-
-      .movers-toggle-btn {
-        padding: 6px 10px;
-        font-size: 12px;
-      }
-
-      .data-note {
-        display: none;
-      }
-
-      .page-wrap {
-        padding: 16px 14px 40px;
-      }
-
-      .section-title {
-        font-size: 20px;
-      }
-
-      .stat-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin: 16px 0 20px;
-      }
-
-      .stat-card {
-        padding: 14px 16px;
-      }
-
-      .stat-label {
-        font-size: 11px;
-        margin-bottom: 6px;
-      }
-
-      .stat-value {
-        font-size: 22px;
-      }
-
-      .stat-unit {
-        font-size: 12px;
-      }
-
-      .view-toggle {
-        gap: 3px;
-        padding: 3px;
-      }
-
-      .view-btn {
-        padding: 7px 14px;
-        font-size: 13px;
-        border-radius: 7px;
-      }
-
-      .fav-only-label {
-        display: none;
-      }
-
-      .fav-only-btn {
-        display: inline-flex;
-      }
-
-      /* 순위별 뷰: 테이블 → 스택형 카드 (동일 DOM, 컬럼만 재배치) */
-      .rank-table-head {
-        display: none;
-      }
-
-      .rank-row {
-        grid-template-columns: 34px 1fr auto 32px;
-        grid-template-areas: "rank name price star";
-        padding: 12px 14px;
-        gap: 6px 10px;
-      }
-
-      .rr-name-group {
-        display: flex;
-        flex-direction: column;
-        grid-area: name;
-        gap: 3px;
-        min-width: 0;
-      }
-
-      .rr-name {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .rr-price-group {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        grid-area: price;
-        gap: 2px;
-      }
-
-      .rr-mcap {
-        display: none;
-      }
-
-      .rr-rank {
-        width: 26px;
-        height: 26px;
-        border-radius: 7px;
-        background: oklch(0.95 0.004 90);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-      }
-
-      .industry-header {
-        flex-direction: row;
-      }
-
-      .sector-row {
-        padding: 12px 14px;
-        gap: 10px;
-      }
-
-      .sr-right {
-        gap: 0;
-      }
-
-      .sr-price {
-        width: auto;
-        margin-right: 10px;
-      }
-
-      .sr-change {
-        width: 56px;
-      }
-
-      .daily-movers {
-        top: 60px;
-        right: 8px;
-        left: 8px;
-        width: auto;
-        max-height: calc(100vh - 76px);
-        padding: 18px 14px;
-      }
-
-      .daily-movers-header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .mover-item {
-        grid-template-columns: minmax(0, 1fr) auto;
-      }
-
-      .mover-close {
-        display: none;
-      }
+    body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); }
+    a { color: var(--color-accent-700); }
+    a:hover { color: var(--color-accent-900); }
+    .k-card:hover { background: var(--color-accent-100); }
+    .k-star:hover { transform: scale(1.15); }
+    .k-seg:hover:not(.active) { background: var(--color-accent-100); }
+    .k-logo { font-family: var(--font-heading); font-weight: 600; letter-spacing: 0.02em; color: var(--color-accent-400); }
+
+    @media (max-width: 1100px) {
+      .k-hero { grid-template-columns: 1fr !important; }
+      .k-stats { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .k-cards { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .k-alerts { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 640px) {
+      .k-cards { grid-template-columns: 1fr !important; }
+      .k-header-right span:first-child { display: none; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="header-brand">
-      <div class="logo-badge">SS</div>
-      <div>
-        <h1>SS Family</h1>
-        <p>관심기업 분석</p>
+  <div style="min-height:100vh;background:var(--color-bg);background-image:linear-gradient(var(--color-neutral-200) 1px,transparent 1px),linear-gradient(90deg,var(--color-neutral-200) 1px,transparent 1px);background-size:68px 68px;">
+
+    <header style="position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:var(--space-6);padding:var(--space-4) var(--space-8);background:var(--color-bg);border-bottom:1px solid var(--color-divider);">
+      <div style="display:flex;align-items:center;gap:var(--space-4);">
+        <div style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:var(--color-accent);color:var(--color-bg);font-family:var(--font-heading);font-weight:600;font-size:15px;">SS</div>
+        <div style="display:flex;flex-direction:column;">
+          <span style="font-family:var(--font-heading);font-weight:600;font-size:19px;line-height:1.05;">SS Family</span>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600);">SSFAMILY · 8 STOCK ANALYSIS</span>
+        </div>
       </div>
-    </div>
-    <nav class="market-switch" aria-label="시장 선택">
-      <span class="market-switch-btn active">⭐ 관심기업 8</span>
-      <span class="fav-count">★ <span id="favCount">0</span></span>
-      <button type="button" class="movers-toggle-btn" id="moversToggleBtn" aria-expanded="false">🔔 5%+ 변동 <span id="moversToggleCount">0</span></button>
-    </nav>
-  </header>
-
-  <main class="page-wrap">
-    <h2 class="section-title" id="mainTitle">SS Family 관심기업</h2>
-    <p class="data-note" style="margin:0 0 0;text-align:left;max-width:none;">
-      직접 선정한 8개 관심기업입니다. 재무 데이터는 OpenDART 공시 원문, 시세는 Yahoo Finance,
-      목표주가는 한경 코리아마켓 컨센서스를 기준으로 합니다. 투자 권고가 아닙니다.
-    </p>
-
-    <div class="stat-grid" id="statGrid"></div>
-
-    <div class="toolbar">
-      <div class="view-toggle" aria-label="보기 방식 선택">
-        <button class="view-btn active" type="button" id="rankViewBtn">순위별 보기</button>
-        <button class="view-btn" type="button" id="industryViewBtn">업종별 보기</button>
+      <div class="k-header-right" style="display:flex;align-items:center;gap:var(--space-3);">
+        <span id="dateChip" style="font-family:var(--font-heading);font-size:13px;letter-spacing:0.12em;text-transform:uppercase;padding:var(--space-2) var(--space-3);border:1px solid var(--color-divider);color:var(--color-accent-700);"></span>
+        <span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;padding:var(--space-2) var(--space-3);border:1px solid var(--color-divider);">★ <span id="favCount">0</span></span>
       </div>
-      <label class="fav-only-label">
-        <input type="checkbox" id="favOnlyCheckbox" />
-        즐겨찾기만 보기
-      </label>
-      <button class="fav-only-btn" type="button" id="favOnlyBtn">★ 즐겨찾기만</button>
-    </div>
+    </header>
 
-    <section id="stockArea"></section>
+    <main style="max-width:1240px;margin:0 auto;padding:var(--space-8) var(--space-8) 72px;">
 
-    <section class="daily-movers" aria-labelledby="dailyMoversTitle">
-      <div class="daily-movers-header">
+      <section class="k-hero" style="display:grid;grid-template-columns:1fr 380px;gap:var(--space-8);align-items:end;margin-bottom:var(--space-8);">
         <div>
-          <p class="daily-movers-eyebrow">Daily Market Move</p>
-          <h2 class="daily-movers-title" id="dailyMoversTitle">전일 대비 5% 이상 변동 종목</h2>
+          <div style="font-family:var(--font-heading);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:var(--space-2);">Coverage · 8 issues</div>
+          <h1 style="margin:0;font-size:52px;letter-spacing:-0.02em;">8개 관심기업 분석 보드</h1>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div class="daily-movers-date">2026년 8월 25일 종가 기준</div>
-          <button type="button" class="movers-close-btn" id="moversCloseBtn" aria-label="닫기">✕</button>
+        <p style="margin:0;font-size:12.5px;line-height:1.6;color:var(--color-neutral-700);">직접 선정해 상시 추적하는 8개 종목만 다룹니다. 현재가·등락률·시가총액을 한 판에 놓고 비교하며, 각 종목 상세 페이지로 이어집니다. 재무 데이터는 OpenDART 공시 원문, 시세는 Yahoo Finance 기준입니다. 투자 권고가 아닙니다.</p>
+      </section>
+
+      <section class="k-stats" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6);margin-bottom:var(--space-8);" id="statGrid"></section>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-3);margin-bottom:var(--space-6);">
+        <div style="display:flex;align-items:baseline;gap:var(--space-3);">
+          <h2 style="margin:0;font-size:24px;">종목 카드</h2>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600);">정렬 기준</span>
         </div>
+        <div style="display:flex;border:1px solid var(--color-divider);" id="sortToolbar"></div>
       </div>
 
-      <div class="mover-summary" aria-label="변동 종목 요약">
-        <div class="mover-summary-card">
-          <span class="mover-summary-label">대상 종목</span>
-          <strong class="mover-summary-value">2개</strong>
-        </div>
-        <div class="mover-summary-card">
-          <span class="mover-summary-label">해당 업종</span>
-          <strong class="mover-summary-value">2개</strong>
-        </div>
-        <div class="mover-summary-card">
-          <span class="mover-summary-label">5% 이상 하락</span>
-          <strong class="mover-summary-value">0개</strong>
-        </div>
-      </div>
+      <section class="k-cards" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-6);margin-bottom:48px;" id="cardGrid"></section>
 
-      <div class="mover-groups" id="dailyMoverGroups"></div>
+      <section style="margin-bottom:48px;">
+        <div style="display:flex;align-items:baseline;gap:var(--space-3);margin-bottom:var(--space-6);">
+          <h2 style="margin:0;font-size:24px;">지표 비교</h2>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600);">Spec sheet</span>
+        </div>
+        <div class="blueprint">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="overflow-x:auto;">
+            <div id="compareTable"></div>
+          </div>
+        </div>
+      </section>
 
-      <p class="daily-movers-note">
-        각 종목 상세 페이지에 표시된 Yahoo Finance 최근 종가와 전일 대비 등락률을 기준으로 매일 자동 분류합니다. 투자 권고가 아닙니다.
-      </p>
-    </section>
-  </main>
+      <section id="alertSection"></section>
+    </main>
 
-  <footer>
-    © 2026 SS Family. All rights reserved.
-  </footer>
+    <footer style="padding:var(--space-6) var(--space-8);border-top:1px solid var(--color-divider);font-size:12px;letter-spacing:0.08em;color:var(--color-neutral-600);text-align:center;">© 2026 SS FAMILY. ALL RIGHTS RESERVED.</footer>
+  </div>
 
   <script>
     const dailyMovers = [
@@ -955,477 +104,186 @@
       "097230": { price: 17010, change: 1.19 }
     };
 
-const stocks = [
-      {
-            "rank": 1,
-            "name": "삼성전자",
-            "code": "005930",
-            "industry": "반도체·전자",
-            "slug": "samsung-electronics",
-            "image": "images/001_samsung-electronics.png",
-            "page": "stocks/001_005930.html",
-            "sharesOut": 5846278608
-      },
-      {
-            "rank": 2,
-            "name": "KB금융",
-            "code": "105560",
-            "industry": "금융",
-            "slug": "kb-financial",
-            "image": "images/002_kb-financial.png",
-            "page": "stocks/002_105560.html",
-            "sharesOut": 354687734
-      },
-      {
-            "rank": 3,
-            "name": "신한지주",
-            "code": "055550",
-            "industry": "금융",
-            "slug": "shinhan-financial",
-            "image": "images/003_shinhan-financial.png",
-            "page": "stocks/003_055550.html",
-            "sharesOut": 469450239
-      },
-      {
-            "rank": 4,
-            "name": "기아",
-            "code": "000270",
-            "industry": "자동차",
-            "slug": "kia",
-            "image": "images/004_kia.png",
-            "page": "stocks/004_000270.html",
-            "sharesOut": 390412998
-      },
-      {
-            "rank": 5,
-            "name": "한화",
-            "code": "000880",
-            "industry": "지주·복합기업",
-            "slug": "hanwha",
-            "image": "images/005_hanwha.png",
-            "page": "stocks/005_000880.html",
-            "sharesOut": 70507919
-      },
-      {
-            "rank": 6,
-            "name": "PKC",
-            "code": "001340",
-            "industry": "화학·소재",
-            "slug": "pkc",
-            "image": "images/006_pkc.png",
-            "page": "stocks/006_001340.html",
-            "sharesOut": 45028089
-      },
-      {
-            "rank": 7,
-            "name": "에이블씨엔씨",
-            "code": "078520",
-            "industry": "생활·화장품",
-            "slug": "able-cnc",
-            "image": "images/007_able-cnc.png",
-            "page": "stocks/007_078520.html",
-            "sharesOut": 26014161
-      },
-      {
-            "rank": 8,
-            "name": "HJ중공업",
-            "code": "097230",
-            "industry": "조선·건설",
-            "slug": "hj-heavy",
-            "image": "images/008_hj-heavy.png",
-            "page": "stocks/008_097230.html",
-            "sharesOut": 90295344
-      }
-].filter((s) => s.rank <= 100);
+    const latestUpdateDate = "2026-08-25";
 
-    const industryOrder = [
-      "반도체·전자",
-      "금융",
-      "자동차",
-      "지주·복합기업",
-      "화학·소재",
-      "생활·화장품",
-      "조선·건설"
-];
+    const stocks = [
+      { "rank": 1, "name": "삼성전자", "code": "005930", "industry": "반도체·전자", "slug": "samsung-electronics", "page": "stocks/001_005930.html", "sharesOut": 5846278608 },
+      { "rank": 2, "name": "KB금융", "code": "105560", "industry": "금융", "slug": "kb-financial", "page": "stocks/002_105560.html", "sharesOut": 354687734 },
+      { "rank": 3, "name": "신한지주", "code": "055550", "industry": "금융", "slug": "shinhan-financial", "page": "stocks/003_055550.html", "sharesOut": 469450239 },
+      { "rank": 4, "name": "기아", "code": "000270", "industry": "자동차", "slug": "kia", "page": "stocks/004_000270.html", "sharesOut": 390412998 },
+      { "rank": 5, "name": "한화", "code": "000880", "industry": "지주·복합기업", "slug": "hanwha", "page": "stocks/005_000880.html", "sharesOut": 70507919 },
+      { "rank": 6, "name": "PKC", "code": "001340", "industry": "화학·소재", "slug": "pkc", "page": "stocks/006_001340.html", "sharesOut": 45028089 },
+      { "rank": 7, "name": "에이블씨엔씨", "code": "078520", "industry": "생활·화장품", "slug": "able-cnc", "page": "stocks/007_078520.html", "sharesOut": 26014161 },
+      { "rank": 8, "name": "HJ중공업", "code": "097230", "industry": "조선·건설", "slug": "hj-heavy", "page": "stocks/008_097230.html", "sharesOut": 90295344 }
+    ];
 
-    const stockArea = document.getElementById('stockArea');
-    const mainTitle = document.getElementById('mainTitle');
-    const rankViewBtn = document.getElementById('rankViewBtn');
-    const industryViewBtn = document.getElementById('industryViewBtn');
-    const statGrid = document.getElementById('statGrid');
-    const favCountEl = document.getElementById('favCount');
-    const favOnlyCheckbox = document.getElementById('favOnlyCheckbox');
-    const favOnlyBtn = document.getElementById('favOnlyBtn');
-
-    // ── 즐겨찾기 (localStorage) ──
+    const UP = '#a8462c';
     const FAV_KEY = 'ssfamily.favorites';
     let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]'));
-    let currentView = 'rank';
-    let favOnlyActive = false;
-    let rankPage = 1;
-    const RANK_PAGE_SIZE = 10;
+    let sortBy = 'mcap';
 
     function saveFavorites() {
       localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
+      document.getElementById('favCount').textContent = favorites.size;
     }
-
-    function updateFavCount() {
-      favCountEl.textContent = favorites.size;
-    }
-
-    function toggleFavorite(code) {
+    function toggleFav(code) {
       favorites.has(code) ? favorites.delete(code) : favorites.add(code);
       saveFavorites();
-      updateFavCount();
-      rerenderCurrentView();
+      renderAll();
     }
 
-    // ── 포맷터 ──
-    function fmtWon(n) { return n.toLocaleString('ko-KR') + '원'; }
-    function fmtChange(pct) { return (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%'; }
-    function fmtMcap(joWon) {
-      if (joWon == null) return '—';
-      return joWon.toFixed(1) + '조원';
-    }
+    function won(n) { return n.toLocaleString('ko-KR') + '원'; }
+    function pct(v) { return (v >= 0 ? '+' : '') + v.toFixed(2) + '%'; }
+    function chColor(v) { return v > 0 ? UP : v < 0 ? 'var(--color-accent-700)' : 'var(--color-neutral-600)'; }
     function marketCapOf(stock) {
       const live = stockLive[stock.code];
       if (!live || !stock.sharesOut) return null;
       return (live.price * stock.sharesOut) / 1e12;
     }
 
-    // 시가총액(marketCapOf) 내림차순으로 매긴 실시간 순위. 라이브 시총이 없는 종목은
-    // 뒤로 밀리되, 서로간에는 정적 rank(초기 선정 기준)로 정렬해 순서가 흔들리지 않게 함.
-    function computeLiveRanks() {
-      const withCap = stocks.map((s) => ({ code: s.code, cap: marketCapOf(s), staticRank: s.rank }));
-      withCap.sort((a, b) => {
-        if (a.cap != null && b.cap != null) return b.cap - a.cap;
-        if (a.cap != null) return -1;
-        if (b.cap != null) return 1;
-        return a.staticRank - b.staticRank;
+    function sortedStocks() {
+      return stocks.slice().sort((a, b) => {
+        if (sortBy === 'change') return (stockLive[b.code] ? stockLive[b.code].change : -99) - (stockLive[a.code] ? stockLive[a.code].change : -99);
+        if (sortBy === 'name') return a.name.localeCompare(b.name, 'ko');
+        return (marketCapOf(b) || 0) - (marketCapOf(a) || 0);
       });
-      const map = new Map();
-      withCap.forEach((item, i) => map.set(item.code, i + 1));
-      return map;
-    }
-    const liveRanks = computeLiveRanks();
-    function rankOf(stock) { return liveRanks.get(stock.code) ?? stock.rank; }
-
-    function getVisibleIndustries() {
-      return industryOrder.filter((industry) =>
-        stocks.some((stock) => stock.industry === industry)
-      );
     }
 
-    // ── 통계 카드 ──
-    function renderStatCards() {
-      const liveVals = Object.values(stockLive);
-      const upCount = liveVals.filter((v) => v.change >= 5).length;
-      const downCount = liveVals.filter((v) => v.change <= -5).length;
-      statGrid.innerHTML = `
-        <div class="stat-card">
-          <div class="stat-label">대상 종목</div>
-          <div class="stat-value">${stocks.length}<span class="stat-unit"> 개</span></div>
+    function renderStats(ordered) {
+      const capSum = ordered.reduce((sum, s) => sum + (marketCapOf(s) || 0), 0);
+      const changes = ordered.map((s) => stockLive[s.code] ? stockLive[s.code].change : null).filter((v) => v != null);
+      const avgChange = changes.length ? changes.reduce((a, b) => a + b, 0) / changes.length : 0;
+      const stats = [
+        { label: '분석 종목', value: ordered.length, unit: '개', color: 'var(--color-text)' },
+        { label: '합산 시가총액', value: capSum.toFixed(1), unit: '조원', color: 'var(--color-accent-800)' },
+        { label: '평균 등락률', value: pct(avgChange), unit: '', color: chColor(avgChange) },
+        { label: '5% 이상 변동', value: dailyMovers.length, unit: '개', color: dailyMovers.length ? UP : 'var(--color-text)' }
+      ];
+      document.getElementById('statGrid').innerHTML = stats.map((c) => `
+        <div class="blueprint" style="padding:var(--space-4) var(--space-6);">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:var(--space-2);">${c.label}</div>
+          <div style="font-family:var(--font-heading);font-size:36px;line-height:1;color:${c.color}">${c.value}<span style="font-size:14px;font-family:var(--font-body);font-weight:400;color:var(--color-neutral-600);"> ${c.unit}</span></div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">해당 업종</div>
-          <div class="stat-value">${getVisibleIndustries().length}<span class="stat-unit"> 개</span></div>
+      `).join('');
+    }
+
+    function renderSortToolbar() {
+      const sorts = [['mcap', '시가총액'], ['change', '등락률'], ['name', '이름']];
+      document.getElementById('sortToolbar').innerHTML = sorts.map(([id, label], i) => `
+        <button type="button" class="k-seg ${sortBy === id ? 'active' : ''}" data-sort="${id}" style="border:0;${i < sorts.length - 1 ? 'border-right:1px solid var(--color-divider);' : ''}cursor:pointer;padding:var(--space-3) var(--space-4);font-family:var(--font-heading);font-weight:600;font-size:14px;letter-spacing:0.04em;background:${sortBy === id ? 'var(--color-accent)' : 'transparent'};color:${sortBy === id ? 'var(--color-bg)' : 'var(--color-text)'}">${label}</button>
+      `).join('');
+      document.querySelectorAll('#sortToolbar .k-seg').forEach((btn) => {
+        btn.addEventListener('click', () => { sortBy = btn.dataset.sort; renderAll(); });
+      });
+    }
+
+    function renderCards(ordered) {
+      document.getElementById('cardGrid').innerHTML = ordered.map((s, i) => {
+        const live = stockLive[s.code];
+        const has = live && typeof live.change === 'number';
+        const fav = favorites.has(s.code);
+        const cap = marketCapOf(s);
+        return `
+        <div class="blueprint k-card" style="display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-4);transition:background .15s;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:var(--font-heading);font-size:26px;line-height:1;color:var(--color-accent);">${String(i + 1).padStart(2, '0')}</span>
+            <button type="button" class="k-star" data-code="${s.code}" style="border:0;background:none;cursor:pointer;font-size:17px;line-height:1;padding:2px;transition:transform .12s;color:${fav ? 'var(--color-accent)' : 'var(--color-neutral-400)'}">${fav ? '★' : '☆'}</button>
+          </div>
+          <div class="blueprint" style="position:relative;height:96px;display:flex;align-items:center;justify-content:center;">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <span class="k-logo" style="font-size:22px;">${s.code}</span>
+          </div>
+          <div>
+            <a href="${s.page}" style="text-decoration:none;color:inherit;font-family:var(--font-heading);font-size:22px;line-height:1.1;display:block;">${s.name}</a>
+            <div style="font-size:11px;letter-spacing:0.08em;color:var(--color-neutral-600);margin-top:2px;">${s.code} · ${s.industry}</div>
+          </div>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;border-top:1px solid var(--color-divider);padding-top:var(--space-3);">
+            <span style="font-size:15px;font-weight:500;font-variant-numeric:tabular-nums;">${live ? won(live.price) : '—'}</span>
+            <span style="font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;color:${has ? chColor(live.change) : 'inherit'}">${has ? pct(live.change) : '—'}</span>
+          </div>
+          <div style="font-size:11px;letter-spacing:0.08em;color:var(--color-neutral-600);">시총 ${cap == null ? '—' : cap.toFixed(1) + '조원'}</div>
+          <a href="${s.page}" class="btn btn-primary" style="border-radius:0;font-size:13px;letter-spacing:0.06em;">상세 분석</a>
+        </div>`;
+      }).join('');
+      document.querySelectorAll('#cardGrid .k-star').forEach((btn) => {
+        btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggleFav(btn.dataset.code); });
+      });
+    }
+
+    function renderCompareTable(ordered) {
+      const n = ordered.length;
+      const cols = `180px repeat(${n},minmax(110px,1fr))`;
+      const headerCells = ordered.map((s) => `<div style="text-align:right;font-family:var(--font-heading);font-size:14px;letter-spacing:0.02em;color:var(--color-text);">${s.name}</div>`).join('');
+      const rows = [
+        { label: '현재가', cells: ordered.map((s) => { const l = stockLive[s.code]; return { text: l ? won(l.price) : '—', color: 'var(--color-text)' }; }) },
+        { label: '전일 대비 등락률', cells: ordered.map((s) => { const l = stockLive[s.code]; const has = l && typeof l.change === 'number'; return { text: has ? pct(l.change) : '—', color: has ? chColor(l.change) : 'var(--color-text)' }; }) },
+        { label: '시가총액', cells: ordered.map((s) => { const c = marketCapOf(s); return { text: c == null ? '—' : c.toFixed(1) + '조원', color: 'var(--color-text)' }; }) },
+        { label: '발행주식수', cells: ordered.map((s) => ({ text: s.sharesOut ? (s.sharesOut / 1e6).toFixed(1) + '백만주' : '—', color: 'var(--color-neutral-700)' })) }
+      ];
+      const rowsHtml = rows.map((row) => `
+        <div style="display:grid;grid-template-columns:${cols};align-items:center;padding:var(--space-3) var(--space-6);border-bottom:1px solid var(--color-neutral-200);">
+          <div style="font-size:12.5px;letter-spacing:0.04em;color:var(--color-neutral-700);">${row.label}</div>
+          ${row.cells.map((c) => `<div style="text-align:right;font-size:14px;font-weight:500;font-variant-numeric:tabular-nums;color:${c.color}">${c.text}</div>`).join('')}
         </div>
-        <div class="stat-card">
-          <div class="stat-label">5% 이상 상승</div>
-          <div class="stat-value up">${upCount}<span class="stat-unit"> 개</span></div>
+      `).join('');
+      document.getElementById('compareTable').innerHTML = `
+        <div style="display:grid;grid-template-columns:${cols};align-items:center;padding:var(--space-3) var(--space-6);border-bottom:1px solid var(--color-divider);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-neutral-600);">
+          <div>지표</div>
+          ${headerCells}
         </div>
-        <div class="stat-card">
-          <div class="stat-label">5% 이상 하락</div>
-          <div class="stat-value dn">${downCount}<span class="stat-unit"> 개</span></div>
-        </div>
+        ${rowsHtml}
       `;
     }
 
-    // ── 순위별 뷰 ──
-    function createRankRow(stock) {
-      const row = document.createElement('div');
-      row.className = 'rank-row';
-      row.setAttribute('role', 'row');
-
-      const live = stockLive[stock.code];
-      const isFav = favorites.has(stock.code);
-      const mcap = marketCapOf(stock);
-      const hasChange = live && typeof live.change === 'number';
-
-      row.innerHTML = `
-        <div class="rr-rank" role="cell">${rankOf(stock)}</div>
-        <div class="rr-name-group">
-          <div class="rr-name" role="cell">${stock.name}<small>${stock.code}</small></div>
-          <div role="cell"><span class="industry-badge">${stock.industry}</span></div>
-        </div>
-        <div class="rr-price-group">
-          <div class="rr-price" role="cell">${live ? fmtWon(live.price) : '—'}</div>
-          <div class="rr-change ${hasChange ? (live.change >= 0 ? 'up' : 'dn') : ''}" role="cell">${hasChange ? fmtChange(live.change) : '—'}</div>
-        </div>
-        <div class="rr-mcap" role="cell">${fmtMcap(mcap)}</div>
-        <div class="rr-star" role="cell"><button type="button" class="star-btn ${isFav ? 'active' : ''}" aria-label="즐겨찾기">${isFav ? '★' : '☆'}</button></div>
-      `;
-
-      row.addEventListener('click', () => { window.location.href = stock.page; });
-      row.querySelector('.star-btn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleFavorite(stock.code);
-      });
-
-      return row;
-    }
-
-    function createPagination(totalItems, pageSize, page, onChange) {
-      const totalPages = Math.max(1, Math.ceil(totalItems / pageSize));
-      if (page > totalPages) page = totalPages;
-
-      const nav = document.createElement('div');
-      nav.className = 'pagination';
-      nav.setAttribute('role', 'navigation');
-      nav.setAttribute('aria-label', '페이지 이동');
-
-      const makeBtn = (label, targetPage, opts = {}) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'page-btn' + (opts.active ? ' active' : '');
-        btn.textContent = label;
-        btn.disabled = !!opts.disabled;
-        if (!opts.disabled) {
-          btn.addEventListener('click', () => onChange(targetPage));
-        }
-        return btn;
-      };
-
-      nav.appendChild(makeBtn('← 이전', page - 1, { disabled: page <= 1 }));
-      for (let p = 1; p <= totalPages; p++) {
-        nav.appendChild(makeBtn(String(p), p, { active: p === page }));
+    function renderAlerts() {
+      const section = document.getElementById('alertSection');
+      if (dailyMovers.length === 0) {
+        section.innerHTML = `<p style="margin:0;padding:var(--space-6);border:1px solid var(--color-divider);font-size:13px;color:var(--color-neutral-700);text-align:center;">오늘 8개 종목 중 전일 대비 5% 이상 변동한 종목은 없습니다.</p>`;
+        return;
       }
-      nav.appendChild(makeBtn('다음 →', page + 1, { disabled: page >= totalPages }));
-
-      return nav;
-    }
-
-    function renderRankView() {
-      stockArea.innerHTML = '';
-      mainTitle.textContent = 'KOSPI Top 100 - 순위별 보기';
-
-      const base = [...stocks]
-        .filter((s) => !favOnlyActive || favorites.has(s.code))
-        .sort((a, b) => rankOf(a) - rankOf(b));
-
-      const totalPages = Math.max(1, Math.ceil(base.length / RANK_PAGE_SIZE));
-      if (rankPage > totalPages) rankPage = totalPages;
-      const start = (rankPage - 1) * RANK_PAGE_SIZE;
-      const pageItems = base.slice(start, start + RANK_PAGE_SIZE);
-
-      const table = document.createElement('div');
-      table.className = 'rank-table';
-      table.setAttribute('role', 'table');
-
-      const head = document.createElement('div');
-      head.className = 'rank-table-head';
-      head.setAttribute('role', 'row');
-      head.innerHTML = `
-        <div role="columnheader">순위</div>
-        <div role="columnheader">종목명</div>
-        <div role="columnheader">업종</div>
-        <div role="columnheader" style="text-align:right;">현재가</div>
-        <div role="columnheader" style="text-align:right;">등락률</div>
-        <div role="columnheader" style="text-align:right;">시가총액</div>
-        <div role="columnheader"></div>
-      `;
-      table.appendChild(head);
-
-      pageItems.forEach((stock) => table.appendChild(createRankRow(stock)));
-
-      stockArea.appendChild(table);
-
-      if (base.length > 0) {
-        stockArea.appendChild(
-          createPagination(base.length, RANK_PAGE_SIZE, rankPage, (p) => {
-            rankPage = p;
-            renderRankView();
-            stockArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          })
-        );
-      }
-    }
-
-    // ── 업종별 뷰 ──
-    function createSectorRow(stock) {
-      const row = document.createElement('div');
-      row.className = 'sector-row';
-
-      const live = stockLive[stock.code];
-      const isFav = favorites.has(stock.code);
-      const hasChange = live && typeof live.change === 'number';
-
-      row.innerHTML = `
-        <div class="sr-left">
-          <button type="button" class="star-btn ${isFav ? 'active' : ''}" aria-label="즐겨찾기">${isFav ? '★' : '☆'}</button>
-          <div class="sr-name">${stock.name}</div>
-          <div class="sr-code">${stock.code}</div>
+      section.innerHTML = `
+        <div style="display:flex;align-items:baseline;gap:var(--space-3);margin-bottom:var(--space-6);">
+          <h2 style="margin:0;font-size:24px;">5% 이상 변동</h2>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-neutral-600);">Daily market move</span>
         </div>
-        <div class="sr-right">
-          <div class="sr-price">${live ? fmtWon(live.price) : '—'}</div>
-          <div class="sr-change ${hasChange ? (live.change >= 0 ? 'up' : 'dn') : ''}">${hasChange ? fmtChange(live.change) : '—'}</div>
+        <div class="k-alerts" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6);">
+          ${dailyMovers.map((a) => `
+            <div class="blueprint" style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-4) var(--space-6);">
+              <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+              <div>
+                <div style="font-family:var(--font-heading);font-size:19px;line-height:1.1;">${a.name}</div>
+                <div style="font-size:11px;letter-spacing:0.08em;color:var(--color-neutral-600);">${a.code} · ${a.industry}</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:14px;font-variant-numeric:tabular-nums;">${a.close}</div>
+                <div style="font-family:var(--font-heading);font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums;color:${chColor(a.change)}">${pct(a.change)}</div>
+              </div>
+            </div>
+          `).join('')}
         </div>
       `;
-
-      row.addEventListener('click', () => { window.location.href = stock.page; });
-      row.querySelector('.star-btn').addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleFavorite(stock.code);
-      });
-
-      return row;
     }
 
-    function renderSectorView() {
-      stockArea.innerHTML = '';
-      mainTitle.textContent = 'KOSPI Top 100 - 업종별 보기';
-
-      const base = stocks.filter((s) => !favOnlyActive || favorites.has(s.code));
-
-      getVisibleIndustries().forEach((industry) => {
-        const industryStocks = base
-          .filter((stock) => stock.industry === industry)
-          .sort((a, b) => rankOf(a) - rankOf(b));
-
-        if (industryStocks.length === 0) return;
-
-        const section = document.createElement('section');
-        section.className = 'industry-section';
-
-        const header = document.createElement('div');
-        header.className = 'industry-header';
-        header.innerHTML = `
-          <h3 class="industry-title">${industry}</h3>
-          <span class="industry-count">${industryStocks.length}개 종목</span>
-        `;
-
-        const list = document.createElement('div');
-        list.className = 'sector-list';
-        industryStocks.forEach((stock) => list.appendChild(createSectorRow(stock)));
-
-        section.appendChild(header);
-        section.appendChild(list);
-        stockArea.appendChild(section);
-      });
+    function renderDateChip() {
+      const d = new Date(latestUpdateDate + 'T00:00:00+09:00');
+      const text = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')} 종가`;
+      document.getElementById('dateChip').textContent = text;
     }
 
-    // ── 탭 전환 / 즐겨찾기만 보기 ──
-    function setActiveViewButton(mode) {
-      rankViewBtn.classList.toggle('active', mode === 'rank');
-      industryViewBtn.classList.toggle('active', mode === 'industry');
+    function renderAll() {
+      const ordered = sortedStocks();
+      renderStats(ordered);
+      renderSortToolbar();
+      renderCards(ordered);
+      renderCompareTable(ordered);
+      renderAlerts();
     }
 
-    function rerenderCurrentView() {
-      if (currentView === 'rank') { renderRankView(); } else { renderSectorView(); }
-    }
-
-    function setFavOnly(active) {
-      favOnlyActive = active;
-      favOnlyCheckbox.checked = active;
-      favOnlyBtn.classList.toggle('active', active);
-      rankPage = 1;
-      rerenderCurrentView();
-    }
-
-    rankViewBtn.addEventListener('click', () => {
-      currentView = 'rank';
-      rankPage = 1;
-      setActiveViewButton('rank');
-      renderRankView();
-    });
-    industryViewBtn.addEventListener('click', () => {
-      currentView = 'industry';
-      setActiveViewButton('industry');
-      renderSectorView();
-    });
-    favOnlyCheckbox.addEventListener('change', () => setFavOnly(favOnlyCheckbox.checked));
-    favOnlyBtn.addEventListener('click', () => setFavOnly(!favOnlyActive));
-
-    function renderDailyMovers() {
-      const container = document.getElementById('dailyMoverGroups');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const grouped = dailyMovers.reduce((groups, stock) => {
-        if (!groups[stock.industry]) groups[stock.industry] = [];
-        groups[stock.industry].push(stock);
-        return groups;
-      }, {});
-
-      Object.entries(grouped)
-        .sort(([, a], [, b]) => b.length - a.length || Math.abs(b[0].change) - Math.abs(a[0].change))
-        .forEach(([industry, industryStocks], index) => {
-          const group = document.createElement('details');
-          group.className = 'mover-group';
-          group.open = index < 2;
-
-          const summary = document.createElement('summary');
-          summary.innerHTML = `
-            <span>${industry}</span>
-            <span class="mover-group-count">${industryStocks.length}개 종목</span>
-          `;
-
-          const list = document.createElement('ul');
-          list.className = 'mover-list';
-
-          industryStocks
-            .sort((a, b) => Math.abs(b.change) - Math.abs(a.change))
-            .forEach((stock) => {
-              const item = document.createElement('li');
-              item.className = 'mover-item';
-              const isUp = stock.change >= 0;
-              const sign = isUp ? '+' : '';
-              item.innerHTML = `
-                <span class="mover-name"><a href="${stock.page}">${stock.name} <small>(${stock.code})</small></a></span>
-                <span class="mover-close">${stock.close}</span>
-                <span class="mover-change ${isUp ? 'up' : 'dn'}">${sign}${stock.change.toFixed(2)}%</span>
-              `;
-              list.appendChild(item);
-            });
-
-          group.appendChild(summary);
-          group.appendChild(list);
-          container.appendChild(group);
-        });
-    }
-
-    // ── 5%+ 변동 종목 토글 패널 (화면 오른쪽 위) ──
-    const moversToggleBtn = document.getElementById('moversToggleBtn');
-    const moversCloseBtn = document.getElementById('moversCloseBtn');
-    const moversToggleCount = document.getElementById('moversToggleCount');
-    const moversPanel = document.querySelector('.daily-movers');
-
-    function setMoversPanelOpen(open) {
-      moversPanel.classList.toggle('open', open);
-      moversToggleBtn.setAttribute('aria-expanded', String(open));
-    }
-
-    moversToggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      setMoversPanelOpen(!moversPanel.classList.contains('open'));
-    });
-    moversCloseBtn.addEventListener('click', () => setMoversPanelOpen(false));
-    document.addEventListener('click', (e) => {
-      if (moversPanel.classList.contains('open') && !moversPanel.contains(e.target)) {
-        setMoversPanelOpen(false);
-      }
-    });
-
-    function updateMoversToggleBadge() {
-      moversToggleCount.textContent = dailyMovers.length;
-      moversToggleBtn.classList.toggle('has-alerts', dailyMovers.length > 0);
-    }
-
-    updateFavCount();
-    updateMoversToggleBadge();
-    renderStatCards();
-    renderDailyMovers();
-    renderRankView();
+    renderDateChip();
+    saveFavorites();
+    renderAll();
   </script>
 </body>
 </html>
