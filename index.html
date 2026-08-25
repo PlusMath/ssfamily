@@ -906,7 +906,7 @@
           <h2 class="daily-movers-title" id="dailyMoversTitle">전일 대비 5% 이상 변동 종목</h2>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
-          <div class="daily-movers-date">자동 갱신 준비 중</div>
+          <div class="daily-movers-date">2026년 8월 25일 종가 기준</div>
           <button type="button" class="movers-close-btn" id="moversCloseBtn" aria-label="닫기">✕</button>
         </div>
       </div>
@@ -914,11 +914,11 @@
       <div class="mover-summary" aria-label="변동 종목 요약">
         <div class="mover-summary-card">
           <span class="mover-summary-label">대상 종목</span>
-          <strong class="mover-summary-value">0개</strong>
+          <strong class="mover-summary-value">2개</strong>
         </div>
         <div class="mover-summary-card">
           <span class="mover-summary-label">해당 업종</span>
-          <strong class="mover-summary-value">0개</strong>
+          <strong class="mover-summary-value">2개</strong>
         </div>
         <div class="mover-summary-card">
           <span class="mover-summary-label">5% 이상 하락</span>
@@ -939,17 +939,20 @@
   </footer>
 
   <script>
-    const dailyMovers = [];
+    const dailyMovers = [
+      { name: "에이블씨엔씨", code: "078520", industry: "생활·화장품", close: "12,280원", change: 7.25, page: "stocks/007_078520.html" },
+      { name: "한화", code: "000880", industry: "지주·복합기업", close: "118,100원", change: 6.59, page: "stocks/005_000880.html" }
+    ];
 
     const stockLive = {
-      "005930": { price: 231000, change: 0.22 },
-      "105560": { price: 175800, change: 2.51 },
-      "055550": { price: 110000, change: 2.42 },
-      "000270": { price: 134900, change: 0.97 },
-      "000880": { price: 83800, change: 0 },
-      "001340": { price: 5180, change: 0.78 },
-      "078520": { price: 11930, change: 3.74 },
-      "097230": { price: 16700, change: 0 }
+      "005930": { price: 257000, change: 0 },
+      "105560": { price: 166400, change: 2.02 },
+      "055550": { price: 106500, change: 3.1 },
+      "000270": { price: 134900, change: 2.59 },
+      "000880": { price: 118100, change: 6.59 },
+      "001340": { price: 5070, change: 1.6 },
+      "078520": { price: 12280, change: 7.25 },
+      "097230": { price: 17010, change: 1.19 }
     };
 
 const stocks = [
