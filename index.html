@@ -14,7 +14,6 @@
     .k-card:hover { background: var(--color-accent-100); }
     .k-star:hover { transform: scale(1.15); }
     .k-seg:hover:not(.active) { background: var(--color-accent-100); }
-    .k-logo { font-family: var(--font-heading); font-weight: 600; letter-spacing: 0.02em; color: var(--color-accent-400); }
 
     @media (max-width: 1100px) {
       .k-hero { grid-template-columns: 1fr !important; }
@@ -107,14 +106,14 @@
     const latestUpdateDate = "2026-08-25";
 
     const stocks = [
-      { "rank": 1, "name": "삼성전자", "code": "005930", "industry": "반도체·전자", "slug": "samsung-electronics", "page": "stocks/001_005930.html", "sharesOut": 5846278608 },
-      { "rank": 2, "name": "KB금융", "code": "105560", "industry": "금융", "slug": "kb-financial", "page": "stocks/002_105560.html", "sharesOut": 354687734 },
-      { "rank": 3, "name": "신한지주", "code": "055550", "industry": "금융", "slug": "shinhan-financial", "page": "stocks/003_055550.html", "sharesOut": 469450239 },
-      { "rank": 4, "name": "기아", "code": "000270", "industry": "자동차", "slug": "kia", "page": "stocks/004_000270.html", "sharesOut": 390412998 },
-      { "rank": 5, "name": "한화", "code": "000880", "industry": "지주·복합기업", "slug": "hanwha", "page": "stocks/005_000880.html", "sharesOut": 70507919 },
-      { "rank": 6, "name": "PKC", "code": "001340", "industry": "화학·소재", "slug": "pkc", "page": "stocks/006_001340.html", "sharesOut": 45028089 },
-      { "rank": 7, "name": "에이블씨엔씨", "code": "078520", "industry": "생활·화장품", "slug": "able-cnc", "page": "stocks/007_078520.html", "sharesOut": 26014161 },
-      { "rank": 8, "name": "HJ중공업", "code": "097230", "industry": "조선·건설", "slug": "hj-heavy", "page": "stocks/008_097230.html", "sharesOut": 90295344 }
+      { "rank": 1, "name": "삼성전자", "code": "005930", "industry": "반도체·전자", "slug": "samsung-electronics", "page": "stocks/001_005930.html", "sharesOut": 5846278608, "logo": "005930-samsung-electronics.webp" },
+      { "rank": 2, "name": "KB금융", "code": "105560", "industry": "금융", "slug": "kb-financial", "page": "stocks/002_105560.html", "sharesOut": 354687734, "logo": "105560-kb-financial.jpg" },
+      { "rank": 3, "name": "신한지주", "code": "055550", "industry": "금융", "slug": "shinhan-financial", "page": "stocks/003_055550.html", "sharesOut": 469450239, "logo": "055550-shinhan-financial.svg" },
+      { "rank": 4, "name": "기아", "code": "000270", "industry": "자동차", "slug": "kia", "page": "stocks/004_000270.html", "sharesOut": 390412998, "logo": "000270-kia.webp" },
+      { "rank": 5, "name": "한화", "code": "000880", "industry": "지주·복합기업", "slug": "hanwha", "page": "stocks/005_000880.html", "sharesOut": 70507919, "logo": "000880-hanwha.webp" },
+      { "rank": 6, "name": "PKC", "code": "001340", "industry": "화학·소재", "slug": "pkc", "page": "stocks/006_001340.html", "sharesOut": 45028089, "logo": "001340-pkc.avif" },
+      { "rank": 7, "name": "에이블씨엔씨", "code": "078520", "industry": "생활·화장품", "slug": "able-cnc", "page": "stocks/007_078520.html", "sharesOut": 26014161, "logo": "078520-able-cnc.jpg" },
+      { "rank": 8, "name": "HJ중공업", "code": "097230", "industry": "조선·건설", "slug": "hj-heavy", "page": "stocks/008_097230.html", "sharesOut": 90295344, "logo": "097230-hj-heavy.png" }
     ];
 
     const UP = '#a8462c';
@@ -191,9 +190,9 @@
             <span style="font-family:var(--font-heading);font-size:26px;line-height:1;color:var(--color-accent);">${String(i + 1).padStart(2, '0')}</span>
             <button type="button" class="k-star" data-code="${s.code}" style="border:0;background:none;cursor:pointer;font-size:17px;line-height:1;padding:2px;transition:transform .12s;color:${fav ? 'var(--color-accent)' : 'var(--color-neutral-400)'}">${fav ? '★' : '☆'}</button>
           </div>
-          <div class="blueprint" style="position:relative;height:96px;display:flex;align-items:center;justify-content:center;">
+          <div class="blueprint" style="position:relative;height:96px;display:flex;align-items:center;justify-content:center;padding:14px;">
             <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-            <span class="k-logo" style="font-size:22px;">${s.code}</span>
+            <img src="images/logos/${s.logo}" alt="${s.name} 로고" style="max-width:100%;max-height:100%;object-fit:contain;" loading="lazy" />
           </div>
           <div>
             <a href="${s.page}" style="text-decoration:none;color:inherit;font-family:var(--font-heading);font-size:22px;line-height:1.1;display:block;">${s.name}</a>
