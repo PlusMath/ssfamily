@@ -5,6 +5,7 @@ logs/
 
 # 로컬 운영 스크립트 (사이트 콘텐츠 아님, kospi10000과 동일 컨벤션)
 /update_daily_charts.ps1
+/migrate_industry_redesign.ps1
 
 # 디자인 레퍼런스 원본(핸드오프 번들) — 사이트 콘텐츠 아님
 /KOSPI 10000 디자인 변경/
