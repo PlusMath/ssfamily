@@ -87,20 +87,22 @@
   </div>
 
   <script>
-    const dailyMovers = [];
+    const dailyMovers = [
+      { name: "한화", code: "000880", industry: "지주·복합기업", close: "130,200원", change: 9.5, page: "stocks/005_000880.html" }
+    ];
 
     const stockLive = {
-      "005930": { price: 261500, change: 1.75 },
-      "105560": { price: 166600, change: 0.12 },
-      "055550": { price: 107400, change: 0.85 },
-      "000270": { price: 131400, change: -2.59 },
-      "000880": { price: 118900, change: 0.68 },
-      "001340": { price: 5060, change: -0.2 },
-      "078520": { price: 11850, change: -3.5 },
-      "097230": { price: 17060, change: 0.29 }
+      "005930": { price: 266000, change: 1.72 },
+      "105560": { price: 168100, change: 0.9 },
+      "055550": { price: 108800, change: 1.3 },
+      "000270": { price: 126100, change: -4.03 },
+      "000880": { price: 130200, change: 9.5 },
+      "001340": { price: 5110, change: 0.99 },
+      "078520": { price: 11490, change: -3.04 },
+      "097230": { price: 17160, change: 0.59 }
     };
 
-    const latestUpdateDate = "2026-08-26";
+    const latestUpdateDate = "2026-08-27";
 
     const stocks = [
       { "rank": 1, "name": "삼성전자", "code": "005930", "industry": "반도체·전자", "slug": "samsung-electronics", "page": "stocks/001_005930.html", "sharesOut": 5846278608, "logo": "005930-samsung-electronics.webp" },
